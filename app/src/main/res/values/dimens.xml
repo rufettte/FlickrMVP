@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Margins-->
+    <dimen name="resultCardViewMargin">5dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--Padding-->
+    <dimen name="paddingBottom">50dp</dimen>
+
+    <!--Font Size-->
+    <dimen name="imageTitle">9pt</dimen>
+</resources>

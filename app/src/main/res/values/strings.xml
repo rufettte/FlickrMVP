@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Flickr</string>
+
+    <!--Search hint-->
+    <string name="search_hint">Search the city name ...</string>
+
+    <!--Urls-->
+    <string name="title_activity_image_viewer">ImageViewerActivity</string>
+
+    <!--Tags-->
+    <string name="MainActivity">MainActivity</string>
+    <string name="SearchableActivity">SearchableActivity</string>
+
+    <!--Messages-->
+    <string name="SearchRequest_error">Unable to give a service temporarily. Check your connection and please, try again later.</string>
+    <string name="SearchRequest_no_data_loaded">No data could be loaded.</string>
+
+    <!--Request Details-->
+    <string name="searchUrl">https://api.flickr.com</string>
+    <string name="searchGetParams">/services/rest/?method=flickr.photos.search&amp;api_key=37ad288835e4c64fc0cb8af3f3a1a65d&amp;format=json&amp;nojsoncallback=1&amp;safe_search=1&amp;per_page=20</string>
+    <string name="page">page</string>
+    <string name="text">text</string>
+</resources>
