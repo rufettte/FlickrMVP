@@ -1,43 +1,47 @@
 package com.example.flickr_mvp.Presenters;
 
 import androidx.annotation.NonNull;
-import com.example.flickr_mvp.Configs.SearchConfig;
 import com.example.flickr_mvp.Contracts.SearchContract;
 import com.example.flickr_mvp.Objects.Response;
+import com.example.flickr_mvp.Services.SearchService;
 import com.example.flickr_mvp.Views.SearchView;
+import org.jetbrains.annotations.NotNull;
+import rx.subscriptions.CompositeSubscription;
 import rx.Observer;
 import rx.Scheduler;
 import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
-/*The main class that starts and handles search request operation.*/
+
 public class SearchPresenter implements SearchContract.Presenter{
 
     @NonNull
-    private CompositeSubscription subscriptions;
-    @NonNull
-    private Scheduler background;
-    @NonNull
-    private Scheduler main;
+    private final CompositeSubscription subscriptions;
 
-    public SearchPresenter(Scheduler background, Scheduler main) {
+    @NonNull
+    private final Scheduler background;
+
+    @NonNull
+    private final Scheduler main;
+
+    @NonNull
+    private final SearchView searchView;
+
+    @NonNull
+    private final SearchService searchService;
+
+    public SearchPresenter(@NotNull Scheduler background, @NotNull Scheduler main,
+                           @NotNull SearchView searchView, @NonNull SearchService searchService) {
         this.background = background;
         this.main = main;
+        this.searchView = searchView;
+        this.searchService = searchService;
         this.subscriptions = new CompositeSubscription();
     }
 
     @Override
-    public void loadData(SearchView searchView, SearchConfig config) {
+    public void loadSearchTerm(String apiKey, Integer pageNumber, String text) {
         searchView.onStart();
-        subscriptions.clear();
-
-        /* Starts to load Response data from the server.
-        *  Processes in background thread (or another thread)
-        *  Observes from the main thread.
-        *
-        * A response object is expected. Otherwise, there is an error.
-        * onCompleted() is invoked after onNext(), iff the expected response is achieved.*/
-        Subscription subscription = config.buildParams()
+        Subscription subscription = searchService.getImages(apiKey, pageNumber, text)
                 .subscribeOn(this.background)
                 .observeOn(this.main)
                 .subscribe(new Observer<Response>() {
@@ -49,13 +53,11 @@ public class SearchPresenter implements SearchContract.Presenter{
                     public void onError(Throwable t) {
                         searchView.onError(t);
                     }
-
                     @Override
                     public void onNext(Response response) {
                         searchView.onSuccess(response);
                     }
                 });
-
         subscriptions.add(subscription);
     }
 }

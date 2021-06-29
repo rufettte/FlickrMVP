@@ -1,7 +1,6 @@
 package com.example.flickr_mvp.Objects;
 
 import android.text.Html;
-
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
@@ -93,10 +92,7 @@ public class Image implements Serializable {
         this.isFamily = isFamily;
     }
 
-    /*
-     * This function creates the url of the image so as to be able to present it
-     * to the user through it.
-     * */
+
     public String getUrl() {
         return "https://farm"
                 + String.valueOf(getFarm())

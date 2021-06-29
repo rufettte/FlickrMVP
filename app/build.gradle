@@ -6,6 +6,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     defaultConfig {
         applicationId "com.example.flickr_mvp"
         minSdkVersion 16
@@ -17,6 +20,11 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            resValue("string", "searchApiKey", localProperties['apiKey'])
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -37,8 +45,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flickr_mvp">
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -11,12 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlickrMVP">
 
-        <!--Important configuration for showing search history to the user-->
         <provider
             android:name="com.example.flickr_mvp.Utils.SuggestionProvider"
-            android:authorities="com.flickr_mvp.SuggestionProvider" />
+            android:authorities="com.flickr_mvp.SuggestionProvider"
+            android:exported="false" />
 
-    <!--Main Activity, the launcher activity, shows the search dialog to the user-->
     <activity
         android:name="com.example.flickr_mvp.Activities.MainActivity"
         android:configChanges="orientation|screenSize|screenLayout|keyboardHidden">
@@ -29,7 +29,6 @@
     </activity>
 
 
-    <!--Search Activity, the searcher activity, shows the search results as a list to the user.-->
     <activity android:name="com.example.flickr_mvp.Activities.SearchActivity"
         android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
         android:launchMode="singleTop">
@@ -40,12 +39,10 @@
             android:resource="@xml/searchable"/>
     </activity>
 
-    <!--Image Viewer Activity, shows the selected image from the search results.-->
     <activity
         android:name="com.example.flickr_mvp.Activities.ImageViewerActivity"
         android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-        android:theme="@style/Theme.FlickrMVP.NoActionBar"
-        android:label="@string/title_activity_image_viewer">
+        android:theme="@style/Theme.FlickrMVP.NoActionBar">
     </activity>
 
     </application>

@@ -1,15 +1,19 @@
 package com.example.flickr_mvp.Objects;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class ImagesResponse {
+
     private int page;
+
     private int pages;
+
     private String total;
+
     @SerializedName("perpage")
     private int perPage;
+
     @SerializedName("photo")
     private List<Image> images;
 
